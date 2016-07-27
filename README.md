@@ -1,5 +1,7 @@
 # BROADcast
 
+(Go to [releases](https://github.com/garnetius/BROADcast/releases) to download the latest Windows build.)
+
 **BROADcast** is a little Windows program which forces global UDP broadcast
 packets on all network interfaces.
 
