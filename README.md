@@ -29,22 +29,22 @@ broadcast packets to all other supported network interfaces as well.)
 
 ## Detailed Function Explanation
 
-  * BROADcast.exe /i “Interface” /m:
+  * `BROADcast.exe /i "Interface" /m`:
     Set the metric of all network interfaces except “Interface” to manual.
     The manual metric value is computed for each interface separately as
     current metric value + “Interface” metric. This turns the “Interface”
     into interface with the lowest metric and makes it a preferred route.
 
-  * BROADcast.exe /i “Interface”:
+  * `BROADcast.exe /i "Interface"`:
     Opposite of the previous command: switch all network interfaces back
     to the automatic metric assigned by the operating system.
 
-  * BROADcast.exe /b:
+  * `BROADcast.exe /b`:
     Start the actual UDP broadcast relaying. The broadcast packets will be
     relayed to all network interfaces (except the preferred route).
     Use “Ctrl+C” to stop the program and exit cleanly.
 
-  * BROADcast.exe /b /d:
+  * `BROADcast.exe /b /d`:
     Display various diagnostic messages during the broadcast.
 
 “Interface” is a network interface literal name which can be looked up (and changed)
@@ -52,8 +52,8 @@ in Network and Sharing Center section of Windows Control Panel.
 
 ## Usage Example
 
-  1. BROADcast.exe /i “VPN” /m: make the “VPN” network interface preferred route.
-  2. BROADcast.exe /b: start the broadcast.
+  1. `BROADcast.exe /i "VPN" /m`: make the “VPN” network interface preferred route.
+  2. `BROADcast.exe /b`: start the broadcast.
   3. Start any application which relies on UDP broadcast packets.
   4. Once you are done with it, stop the BROADcast.exe (Ctrl+C).
-  5. BROADcast.exe /i “VPN”: undo all network interface metric changes.
+  5. `BROADcast.exe /i "VPN"`: undo all network interface metric changes.
