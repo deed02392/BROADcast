@@ -5,6 +5,8 @@
 **BROADcast** is a little Windows program which forces global UDP broadcast
 packets on all network interfaces.
 
+*Administrator privileges are required to run this software. See the OpenVPN example below.*
+
 This allows proper functionality of applications which expect UDP broadcast
 packets to be sent (and received) across all network interfaces available
 in the system (not just the “default” one) and thus to be available
@@ -59,3 +61,19 @@ in Network and Sharing Center section of Windows Control Panel.
   3. Start any application which relies on UDP broadcast packets.
   4. Once you are done with it, stop the BROADcast.exe (Ctrl+C).
   5. `BROADcast.exe /i "VPN"`: undo all network interface metric changes.
+
+## OpenVPN example
+
+Repository contains an example OpenVPN configuration and scripts
+for running BROADcast after starting a OpenVPN server:
+
+  * `clients`: client OpenVPN configuration.
+  * `config`: server OpenVPN configuration.
+  * `scripts`: OpenVPN start/stop scripts that run BROADcast.
+  * `settings`: example OpenVPN registry settings.
+  * `static`: static IP client configuration.
+  * `tap`: install/uninstall TAP Windows driver.
+  * `adjust.js`: script resolving OpenVPN config variables.
+  * `run.bat` and `run.js`: scripts for starting OpenVPN GUI.
+
+Note that just like OpenVPN, BROADcast requires administrator Windows account to run.
