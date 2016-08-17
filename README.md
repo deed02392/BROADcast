@@ -77,3 +77,7 @@ for running BROADcast after starting a OpenVPN server:
   * `run.bat` and `run.js`: scripts for starting OpenVPN GUI.
 
 Note that just like OpenVPN, BROADcast requires administrator Windows account to run.
+
+## Building
+
+You can use [tdm-gcc](http://tdm-gcc.tdragon.net/), [MinGW-w64](http://mingw-w64.org/), or [Microsoft Visual Studio](https://www.visualstudio.com/) to build **BROADcast**.
