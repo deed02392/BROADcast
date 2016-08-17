@@ -1,20 +1,30 @@
 // =============================================================================
 // BROADcast
 //
-// Force UDP (IPv4) broadcast on all network interfaces in Windows.
+// Force UDP (IPv4) broadcast on all network interfaces in Windows 7 and newer.
 //
 // Copyright Kristian Garnét et al.
 // -----------------------------------------------------------------------------
 
 #ifdef __MINGW32__
-  #define _WIN32_WINNT 0x0600
+  #define _WIN32_WINNT 0x0601
 #endif
 
-#ifndef UNICODE
-  #ifdef _UNICODE
+// Unicode ---------------------------------------------------------------------
+
+#ifdef _UNICODE
+  #ifndef UNICODE
     #define UNICODE
   #endif
 #endif
+
+#ifdef UNICODE
+  #ifndef _UNICODE
+    #define _UNICODE
+  #endif
+#endif
+
+// -----------------------------------------------------------------------------
 
 #include <stdio.h>
 #include <stdlib.h>
