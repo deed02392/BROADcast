@@ -88,7 +88,11 @@ static char* utf16_to_utf8 (wchar_t* wstr)
   str = (char*)malloc (str_sz * sizeof (*str));
   if (str == NULL) return NULL;
 
-  if (!WideCharToMultiByte (CP_UTF8, 0, wstr, -1, str, str_sz, NULL, NULL)) return NULL;
+  if (!WideCharToMultiByte (CP_UTF8, 0, wstr, -1, str, str_sz, NULL, NULL))
+  {
+    free (str);
+    return NULL;
+  }
 
   return str;
 }
