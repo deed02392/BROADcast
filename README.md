@@ -1,11 +1,13 @@
 # BROADcast
 
-(Go to [releases](https://github.com/garnetius/BROADcast/releases) to download the latest Windows build.)
+(Go to [releases](https://github.com/garnetius/BROADcast/releases) page to download
+the latest Windows build.)
 
-**BROADcast** is a little Windows program which forces global UDP broadcast
-packets on all network interfaces.
+**BROADcast** is a tiny Windows program which forces global IPv4 UDP broadcast
+packets on all network interfaces (Ethernet & Wi-Fi).
 
-*Administrator privileges are required to run this software. See the OpenVPN example below.*
+*Administrator privileges are required to run this utility.
+See the OpenVPN section below.*
 
 This allows proper functionality of applications which expect UDP broadcast
 packets to be sent (and received) across all network interfaces available
@@ -13,25 +15,21 @@ in the system (not just the “default” one) and thus to be available
 on all networks the system is connected to.
 
 Lots of software developed to work in LAN environment depends on this feature,
-such as chat applications, multiplayer video games, and other
+such as chat applications, older multiplayer video games, and other
 collaborative software.
 
-For a detailed example, using **BROADcast** can allow several people
-to play *Warcraft III* (which advertises its game session using UDP broadcast)
+For example, using **BROADcast** can allow several people to play
+*Warcraft III* (which advertises its game session using UDP broadcast)
 over VPN (such as [OpenVPN](https://openvpn.net/)), making the game session
 discoverable for all participants. (Remember to use TAP device.)
 
-(Windows normally sends broadcast packets only on default network interface,
+Windows normally sends broadcast packets only on default network interface,
 which is determined based on its metric in the routing table, which normally
 is a lowest metric value assigned by the system. **BROADcast** allows to both
 change the default network interface by modifying its metric and relay
-broadcast packets to all other supported network interfaces as well.)
+broadcast packets to all other supported network interfaces as well.
 
-**Note:** BROADcast will only affect IPv4 Ethernet and Wi-Fi network interfaces.
-
-(IPv6 employs multicast, which is different.)
-
-## Detailed Function Explanation
+## Examples
 
   * `BROADcast.exe /i "Interface" /m`:
     Set the metric of all network interfaces except “Interface” to manual.
@@ -46,7 +44,7 @@ broadcast packets to all other supported network interfaces as well.)
   * `BROADcast.exe /b`:
     Start the actual UDP broadcast relaying. The broadcast packets will be
     relayed to all network interfaces (except the preferred route).
-    Use “Ctrl+C” to stop the program and exit cleanly.
+    Use “Ctrl+C” to stop the program and exit gracefully.
 
   * `BROADcast.exe /b /d`:
     Display various diagnostic messages during the broadcast.
@@ -54,7 +52,7 @@ broadcast packets to all other supported network interfaces as well.)
 “Interface” is a network interface literal name which can be looked up (and changed)
 in Network and Sharing Center section of Windows Control Panel.
 
-## Usage Example
+## Usage
 
   1. `BROADcast.exe /i "VPN" /m`: make the “VPN” network interface preferred route.
   2. `BROADcast.exe /b`: start the broadcast.
@@ -62,22 +60,23 @@ in Network and Sharing Center section of Windows Control Panel.
   4. Once you are done with it, stop the BROADcast.exe (Ctrl+C).
   5. `BROADcast.exe /i "VPN"`: undo all network interface metric changes.
 
-## OpenVPN example
+## OpenVPN
 
 Repository contains an example OpenVPN configuration and scripts
 for running BROADcast after starting a OpenVPN server:
 
   * `clients`: client OpenVPN configuration.
   * `config`: server OpenVPN configuration.
-  * `scripts`: OpenVPN start/stop scripts that run BROADcast.
-  * `settings`: example OpenVPN registry settings.
+  * `scripts`: OpenVPN start / stop scripts that run BROADcast.
+  * `settings`: OpenVPN registry settings.
   * `static`: static IP client configuration.
-  * `tap`: install/uninstall TAP Windows driver.
-  * `adjust.js`: script resolving OpenVPN config variables.
-  * `run.bat` and `run.js`: scripts for starting OpenVPN GUI.
+  * `tap`: install / uninstall the TAP Windows driver.
+  * `adjust.js`: script adjusting the OpenVPN config variables.
+  * `run.bat` and `run.js`: scripts for starting the OpenVPN GUI.
 
-Note that just like OpenVPN, BROADcast requires administrator Windows account to run.
+Note that just like OpenVPN BROADcast requires administrator privileges to run.
 
 ## Building
 
-You can use [tdm-gcc](http://tdm-gcc.tdragon.net/), [MinGW-w64](http://mingw-w64.org/), or [Microsoft Visual Studio](https://www.visualstudio.com/) to build **BROADcast**.
+You can use [tdm-gcc](http://tdm-gcc.tdragon.net/), [MinGW-w64](http://mingw-w64.org/),
+or [Microsoft Visual Studio 2013+](https://www.visualstudio.com/) to build **BROADcast** yourself.

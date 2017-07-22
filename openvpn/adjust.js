@@ -1,5 +1,5 @@
-// Expand variable in OpenVPN config.
-// Run multiple times to expand several variables
+// Expand a variable in a config.
+// Run multiple times to expand multiple variables.
 
 var forReading = 1;
 var forWriting = 2;

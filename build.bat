@@ -1,3 +1,5 @@
 @echo off
+cd /d "%~dp0"
 
-gcc.exe -O2 -municode -DUNICODE broadcast.c -o broadcast.exe -lws2_32 -lIphlpapi
+:: Build the executable
+gcc.exe -O2 -mconsole -municode broadcast.c -o BROADcast.exe -lws2_32 -lIphlpapi

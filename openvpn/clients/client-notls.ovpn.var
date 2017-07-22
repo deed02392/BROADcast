@@ -5,16 +5,12 @@ dev-node "$interface$"
 
 proto udp
 remote $server$ $port$
-remote-cert-tls server
 resolv-retry infinite
 nobind
 
 ca "$path$\\easy-rsa\\keys\\ca.crt"
 cert "$path$\\easy-rsa\\keys\\client.crt"
 key "$path$\\easy-rsa\\keys\\client.key"
-tls-auth "$path$\\easy-rsa\\keys\\ta.key" 1
-
-comp-lzo
 
 script-security 2
 up "$path$\\scripts\\on.bat"

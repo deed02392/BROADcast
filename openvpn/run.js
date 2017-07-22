@@ -1,4 +1,3 @@
-// Run VPN session with administrator privileges
-
+// Toggle UAC prompt
 if (WScript.Arguments.length == 0) WScript.CreateObject ("Shell.Application").ShellExecute ("wscript.exe", '"' + WScript.ScriptFullName + '" uac', "", "runas", 1);
 else WScript.CreateObject ("Wscript.Shell").Run ("\"" + WScript.ScriptFullName.substr (0, WScript.ScriptFullName.lastIndexOf (".") + 1) + "bat\"", 0, 0);

@@ -1,9 +1,7 @@
-mode server
-tls-server
-
 local $local$
 port 1194
 proto udp
+comp-lzo adaptive
 
 dev tap
 dev-node "$interface$"
@@ -12,15 +10,12 @@ ca "$path$\\easy-rsa\\keys\\ca.crt"
 cert "$path$\\easy-rsa\\keys\\server.crt"
 key "$path$\\easy-rsa\\keys\\server.key"
 dh "$path$\\easy-rsa\\keys\\dh1024.pem"
-tls-auth "$path$\\easy-rsa\\keys\\ta.key" 0
 
 server 192.168.180.0 255.255.255.0
 keepalive 10 60
 max-clients 1
 
 client-config-dir "$path$\\static"
-
-comp-lzo adaptive
 
 script-security 2
 up "$path$\\scripts\\on.bat"
