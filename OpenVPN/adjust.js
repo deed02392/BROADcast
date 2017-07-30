@@ -5,9 +5,9 @@ var forReading = 1;
 var forWriting = 2;
 
 var args = WScript.Arguments;
-var fileSrcPath = args.item (0);
-var variable = args.item (1);
-var value = args.item (2);
+var fileSrcPath = args.Item (0);
+var variable = args.Item (1);
+var value = args.Item (2);
 
 var fso = WScript.CreateObject ("Scripting.FileSystemObject");
 var fileSrc = fso.OpenTextFile (fileSrcPath, forReading);

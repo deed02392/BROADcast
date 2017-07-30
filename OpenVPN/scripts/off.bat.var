@@ -2,7 +2,7 @@
 cd /d "%~dp0"
 
 :: Stop BROADcast
-taskkill.exe /im "BROADcast.exe" /f
+taskkill.exe /f /im "BROADcast.exe"
 
 :: Use BROADcast to revert network interface metric adjustments
 ..\..\BROADcast.exe /i "$interface$" /a
