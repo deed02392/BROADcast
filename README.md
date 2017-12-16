@@ -7,21 +7,24 @@ the latest Windows build.)
 packets on all network interfaces (Ethernet & Wi-Fi).
 
 *Administrator privileges are required to run this utility.
-See the OpenVPN section below.*
+See the **OpenVPN** section below.*
 
 This allows proper functionality of applications which expect UDP broadcast
 packets to be sent (and received) across all network interfaces available
 in the system (not just the “default” one) and thus to be available
 on all networks the system is connected to.
 
-Lots of software developed to work in LAN environment depends on this feature,
-such as chat applications, older multiplayer video games, and other
+Lots of software developed to work in a LAN environment depends on this feature,
+such as older chat applications, multiplayer video games, and other
 collaborative software.
 
-For example, using **BROADcast** can allow several people to play
-*Warcraft III* (which advertises its game session using UDP broadcast)
-over VPN (such as [OpenVPN](https://openvpn.net/)), making the game session
-discoverable for all participants. (Remember to use TAP device.)
+For example, using **BROADcast** makes it possible to use
+[Vypress Chat](http://www.vypress.com/lan_chat/) (LAN chat application)
+over encrypted VPN (such as [OpenVPN](https://openvpn.net/))
+or just play some [Warcraft III](http://us.blizzard.com/en-us/games/war3/)
+(which advertises its game session over LAN using UDP broadcast packets),
+allowing the game session to be discovered by all participants.
+(Remember to use the “TAP” device.)
 
 Windows normally sends broadcast packets only on default network interface,
 which is determined based on its metric in the routing table, which normally
@@ -35,7 +38,7 @@ broadcast packets to all other supported network interfaces as well.
     Set the metric of all network interfaces except “Interface” to manual.
     The manual metric value is computed for each interface separately as
     current metric value + “Interface” metric. This turns the “Interface”
-    into interface with the lowest metric and makes it a preferred route.
+    into interface with the lowest metric and makes it the preferred route.
 
   * `BROADcast.exe /i "Interface"`:
     Opposite of the previous command: switch all network interfaces back
@@ -50,7 +53,7 @@ broadcast packets to all other supported network interfaces as well.
     Display various diagnostic messages during the broadcast.
 
 “Interface” is a network interface literal name which can be looked up (and changed)
-in Network and Sharing Center section of Windows Control Panel.
+in Network and Sharing Center section of the Windows Control Panel.
 
 ## Usage
 
