@@ -35,7 +35,7 @@
 // Constants -------------------------------------------------------------------
 
 #ifndef VERSION
-  #define VERSION "1.0"
+  #define VERSION "1.0.2"
 #endif
 
 // -----------------------------------------------------------------------------
@@ -305,14 +305,11 @@ static int metric_update (const tchar_t* iface, BOOL manual)
 
 static void broadcast_quit (int err, const tchar_t* msg)
 {
-  shutdown (sock_listen, SD_RECEIVE);
-  closesocket (sock_listen);
+  if (msg != NULL) tputs (msg);
 
   WSACleanup();
 
-  if (msg != NULL) tputs (msg);
-
-  exit (err);
+  ExitProcess ((DWORD)err);
 }
 
 // -----------------------------------------------------------------------------
@@ -492,8 +489,7 @@ static void broadcast_loop()
 static void signal_handler (int signum)
 {
   if (diag) tprintf (TEXT("Exiting on signal %d.\n"), signum);
-
-  broadcast_quit ((signum == SIGINT) ? EXIT_SUCCESS : EXIT_FAILURE, NULL);
+  ExitProcess ((signum == SIGINT) ? (DWORD)EXIT_SUCCESS : (DWORD)EXIT_FAILURE);
 }
 
 // -----------------------------------------------------------------------------
@@ -526,7 +522,7 @@ static void broadcast_start (void)
   == SOCKET_ERROR) broadcast_quit (EXIT_FAILURE
   , TEXT("Error binding on the listening socket.\n"));
 
-  // Handle termination cleanly
+  // Handle Ctrl+C
   signal (SIGINT, signal_handler);
   signal (SIGTERM, signal_handler);
   signal (SIGABRT, signal_handler);
@@ -566,30 +562,27 @@ int main (int argc, char** argv)
   }
 
   // Parse command line arguments (order matters)
-  tchar_t* app = argv[0];
+  tchar_t* prog = argv[0];
 
-  if ((argc == 4) || (argc == 3))
+  argc--;
+  argv++;
+
+  if ((argc == 3) || (argc == 2))
   {
-    argc--;
-    argv++;
-
     if (tstricmp (TEXT("/i"), argv[0]) == 0)
     {
       argc--;
       argv++;
 
       BOOL ret = metric_update (argv[0], ((argc == 2)
-      && (tstricmp (TEXT("/m"), argv[1]) == 0)) ? TRUE : FALSE);
+      && (tstricmp (TEXT("/m"), argv[1]) == 0)));
 
       return ret ? EXIT_SUCCESS : EXIT_FAILURE;
     }
   }
 
-  if ((argc == 3) || (argc == 2))
+  if ((argc == 2) || (argc == 1))
   {
-    argc--;
-    argv++;
-
     if (tstricmp (TEXT("/?"), argv[0]) == 0)
     {
 usage:
@@ -599,7 +592,7 @@ TEXT("Force IPv4 UDP broadcast on all network interfaces.\n")
 TEXT("This program must be run with administrator privileges.\n")
 TEXT("\n")
 TEXT("%s /i <interface> [/m]\n")
-TEXT("%s /b [/d]\n"), app, app);
+TEXT("%s /b [/d]\n"), prog, prog);
 
       return EXIT_FAILURE;
     }
@@ -612,6 +605,8 @@ TEXT("%s /b [/d]\n"), app, app);
     else goto usage;
   }
   else goto usage;
+
+  WSACleanup();
 
   return EXIT_SUCCESS;
 }
