@@ -1,3 +1,5 @@
+                          BSD 2-CLAUSE LICENSE
+
                      Copyright Kristian Garnét et al.
                            All rights reserved.
 
