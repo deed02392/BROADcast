@@ -52,8 +52,12 @@ broadcast packets to all other supported network interfaces as well.
   * `BROADcast.exe /b /d`:
     Display various diagnostic messages during the broadcast.
 
-“Interface” is a network interface literal name which can be looked up (and changed)
-in Network and Sharing Center section of the Windows Control Panel.
+“Interface” is the network interface friendly name which can be looked up (and changed)
+in the Network and Sharing Center section of the Windows Control Panel.
+
+You can find this list quickly by opening a Run prompt (WinKey+X -> Run or Start -> Run...)
+and entering:
+  `%windir%\explorer.exe shell:::{992CFFA0-F557-101A-88EC-00DD010CCC48}`
 
 ## Usage
 
